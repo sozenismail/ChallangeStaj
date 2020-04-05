@@ -2,16 +2,18 @@ package com.ismailsozen.challangestaj.ui.adapter
 
 import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
+import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYouListener
 import com.ismailsozen.challangestaj.R
 import com.ismailsozen.challangestaj.ui.MainActivity
 import com.ismailsozen.challangestaj.ui.MoneyDetailActivity
-import kotlinx.android.synthetic.main.activity_money_detail.view.*
 import kotlinx.android.synthetic.main.adapter_item_money_list.view.*
-import kotlinx.android.synthetic.main.adapter_item_money_list.view.imgMoneyIcon
+import java.math.RoundingMode
 
 
 class MoneyListViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
@@ -22,29 +24,45 @@ class MoneyListViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
 
     val moneytype = itemView.moneyType
     val moneyprice = itemView.moneyPrice
-    val moneyimage = itemView.imgMoneyIcon
+    var moneyimage = itemView.imgMoneyIcon
     var moneydetail =""
+
+
 
     fun bind(money: MainActivity.Coins) {
 
         moneytype.text = money.name
-        moneyprice.text = money.price
-        moneydetail=money.description.toString()
+        val round =money.price.toBigDecimal().setScale(2,RoundingMode.HALF_EVEN).toDouble()
 
-         if (money.color==null){
+        moneyprice.text = round.toString()
+
+        moneydetail=money.description
+
+
+         if (money.color==null || money.color.length<6){
              moneyprice.setTextColor(Color.parseColor("#000000"))
+
          }
 
          else  {
                 moneyprice.setTextColor(Color.parseColor(money.color))
+
           }
 
-        Glide.with(itemView.context)
 
-            .load("http://icons.iconarchive.com/icons/froyoshark/enkel/256/Bitcoin-icon.png")
-            .into(moneyimage)
+        GlideToVectorYou
+            .init()
+            .with(itemView.context)
+            .withListener(object : GlideToVectorYouListener {
+                override fun onLoadFailed() {
+                    Toast.makeText(itemView.context, "Loading failed", Toast.LENGTH_SHORT).show()
+                }
 
-
+                override fun onResourceReady() {
+                    //--
+                }
+            })
+            .load(Uri.parse(money.iconUrl), moneyimage)
 
 
         itemView.setOnClickListener{v->
@@ -52,21 +70,14 @@ class MoneyListViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
             var intent= Intent(v.context, MoneyDetailActivity::class.java)
             intent.putExtra("moneytype",itemView.moneyType.text)
             intent.putExtra("moneyprice",itemView.moneyPrice.text)
-            intent.putExtra("moneydetail",itemView.textViewMoneyDetail.text)
+        //    intent.putExtra("moneydetail",itemView.textViewMoneyDetail.text)
+            intent.putExtra("moneyimage",money.iconUrl)
 
 
             v.context.startActivity(intent)
 
 
         }
-
-/*
-        Picasso.get()
-            .load("")
-            .into(moneyimage);
-
-    }
-*/
 
 
 

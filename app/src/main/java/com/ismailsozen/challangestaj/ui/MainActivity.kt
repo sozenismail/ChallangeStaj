@@ -66,7 +66,8 @@ class MainActivity : AppCompatActivity() {
         val name : String,
         val description : String,
         val color : String,
-        val price:String
+        val price:String,
+        val iconUrl:String
 
     )
 }
