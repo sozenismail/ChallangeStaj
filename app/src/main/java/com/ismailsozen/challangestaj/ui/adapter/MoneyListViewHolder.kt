@@ -70,7 +70,7 @@ class MoneyListViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
             var intent= Intent(v.context, MoneyDetailActivity::class.java)
             intent.putExtra("moneytype",itemView.moneyType.text)
             intent.putExtra("moneyprice",itemView.moneyPrice.text)
-        //    intent.putExtra("moneydetail",itemView.textViewMoneyDetail.text)
+            intent.putExtra("moneydetail",money.description)
             intent.putExtra("moneyimage",money.iconUrl)
 
 

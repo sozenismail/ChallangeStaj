@@ -20,21 +20,9 @@ class MoneyDetailActivity : AppCompatActivity() {
 
         var getIntent=intent
         setTitle(getIntent.getStringExtra("moneytype"))
-        var getUrlSvg=getIntent.getStringExtra("moneyimage")
+        val getUrlSvg=getIntent.getStringExtra("moneyimage")
 
-        GlideToVectorYou
-            .init()
-            .with(this)
-            .withListener(object : GlideToVectorYouListener {
-                override fun onLoadFailed() {
-                    Toast.makeText(applicationContext, "Loading failed", Toast.LENGTH_SHORT).show()
-                }
 
-                override fun onResourceReady() {
-                    //--
-                }
-            })
-            .load(Uri.parse(getUrlSvg), imgMoneyIcon)
 
 
         if (getIntent !=null)
@@ -43,7 +31,19 @@ class MoneyDetailActivity : AppCompatActivity() {
             textViewMoneyPrice.text=getIntent.getStringExtra("moneyprice")
             textViewMoneyDetail.text=getIntent.getStringExtra("moneydetail")
 
+            GlideToVectorYou
+                .init()
+                .with(this)
+                .withListener(object : GlideToVectorYouListener {
+                    override fun onLoadFailed() {
+                        Toast.makeText(applicationContext, "Loading failed", Toast.LENGTH_SHORT).show()
+                    }
 
+                    override fun onResourceReady() {
+                        //--
+                    }
+                })
+                .load(Uri.parse(getUrlSvg), imgMoneyIcon)
 
         }
 
