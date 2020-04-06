@@ -18,39 +18,46 @@ class MoneyDetailActivity : AppCompatActivity() {
 
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        var getIntent=intent
+        var getIntent = intent
         setTitle(getIntent.getStringExtra("moneytype"))
 
-        val getUrlSvg=getIntent.getStringExtra("moneyimage")
-        var moneycolor=getIntent.getStringExtra("moneycolor")
+        val getUrlSvg = getIntent.getStringExtra("moneyimage")
+        var moneycolor = getIntent.getStringExtra("moneycolor")
+        val moneydetail = getIntent.getStringExtra("moneydetail")
+        val moneyprice = getIntent.getStringExtra("moneyprice")
+        val moneytype = getIntent.getStringExtra("moneytype")
 
 
 
-        if (moneycolor==null || moneycolor.length<6){
+        if (moneycolor == null || moneycolor.length < 6) {
 
             textViewMoneyType.setTextColor(Color.parseColor("#000000"))
             textViewMoneyPrice.setTextColor(Color.parseColor("#000000"))
 
-        }
-
-        else  {
+        } else {
             textViewMoneyType.setTextColor(Color.parseColor(moneycolor))
             textViewMoneyPrice.setTextColor(Color.parseColor(moneycolor))
 
         }
 
-        if (getIntent !=null)
-        {
-            textViewMoneyType.text=getIntent.getStringExtra("moneytype")
-            textViewMoneyPrice.text=getIntent.getStringExtra("moneyprice")
-            textViewMoneyDetail.text=getIntent.getStringExtra("moneydetail")
+        if (getIntent != null) {
+            textViewMoneyType.text = moneytype
+            textViewMoneyPrice.text = moneyprice
+
+
+            if (moneydetail == null) {
+                textViewMoneyDetail.text = "No description was found."
+            } else {
+                textViewMoneyDetail.text = moneydetail
+            }
 
             GlideToVectorYou
                 .init()
                 .with(this)
                 .withListener(object : GlideToVectorYouListener {
                     override fun onLoadFailed() {
-                        Toast.makeText(applicationContext, "Loading failed", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(applicationContext, "Loading failed", Toast.LENGTH_SHORT)
+                            .show()
                     }
 
                     override fun onResourceReady() {
@@ -60,7 +67,6 @@ class MoneyDetailActivity : AppCompatActivity() {
                 .load(Uri.parse(getUrlSvg), imgMoneyIcon)
 
         }
-
 
 
     }
