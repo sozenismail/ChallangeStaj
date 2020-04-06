@@ -1,5 +1,6 @@
 package com.ismailsozen.challangestaj.ui
 
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
@@ -15,15 +16,16 @@ class MoneyDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_money_detail)
 
-
-
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         var getIntent=intent
         setTitle(getIntent.getStringExtra("moneytype"))
+
         val getUrlSvg=getIntent.getStringExtra("moneyimage")
+        var moneycolor=getIntent.getStringExtra("moneycolor")
 
-
-
+        textViewMoneyType.setTextColor(Color.parseColor(moneycolor))
+        textViewMoneyPrice.setTextColor(Color.parseColor(moneycolor))
 
         if (getIntent !=null)
         {
@@ -46,6 +48,8 @@ class MoneyDetailActivity : AppCompatActivity() {
                 .load(Uri.parse(getUrlSvg), imgMoneyIcon)
 
         }
+
+
 
     }
 }

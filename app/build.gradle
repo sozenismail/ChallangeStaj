@@ -41,14 +41,13 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
 
-
-    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
-
     implementation("com.squareup.okhttp3:okhttp:4.4.0")
     implementation("com.google.code.gson:gson:2.8.0")
 
-
+    //Svg iconlarını glide ile çekmek için
     implementation 'com.github.corouteam:GlideToVectorYou:v2.0.0'
+
+    implementation 'androidx.cardview:cardview:1.0.0'
+
 
 }

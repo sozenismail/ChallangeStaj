@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYouListener
 import com.ismailsozen.challangestaj.R
-import com.ismailsozen.challangestaj.ui.MainActivity
+import com.ismailsozen.challangestaj.mock.Coins
 import com.ismailsozen.challangestaj.ui.MoneyDetailActivity
 import kotlinx.android.synthetic.main.adapter_item_money_list.view.*
 import java.math.RoundingMode
@@ -29,7 +29,7 @@ class MoneyListViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
 
 
 
-    fun bind(money: MainActivity.Coins) {
+    fun bind(money: Coins) {
 
         moneytype.text = money.name
         val round =money.price.toBigDecimal().setScale(2,RoundingMode.HALF_EVEN).toDouble()
@@ -41,11 +41,13 @@ class MoneyListViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
 
          if (money.color==null || money.color.length<6){
              moneyprice.setTextColor(Color.parseColor("#000000"))
+             moneytype.setTextColor(Color.parseColor("#000000"))
 
          }
 
          else  {
-                moneyprice.setTextColor(Color.parseColor(money.color))
+             moneyprice.setTextColor(Color.parseColor(money.color))
+             moneytype.setTextColor(Color.parseColor(money.color))
 
           }
 
@@ -72,6 +74,7 @@ class MoneyListViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
             intent.putExtra("moneyprice",itemView.moneyPrice.text)
             intent.putExtra("moneydetail",money.description)
             intent.putExtra("moneyimage",money.iconUrl)
+            intent.putExtra("moneycolor",money.color)
 
 
             v.context.startActivity(intent)

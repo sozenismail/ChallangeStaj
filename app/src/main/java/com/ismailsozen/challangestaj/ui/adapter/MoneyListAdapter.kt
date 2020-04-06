@@ -2,11 +2,11 @@ package com.ismailsozen.challangestaj.ui.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.ismailsozen.challangestaj.model.MoneyModel
-import com.ismailsozen.challangestaj.ui.MainActivity
+import com.ismailsozen.challangestaj.mock.MainCls
 
 
-class MoneyListAdapter(val mainCls: MainActivity.MainCls, val liste:List<MoneyModel>): RecyclerView.Adapter<MoneyListViewHolder>() {
+class MoneyListAdapter(val mainCls: MainCls): RecyclerView.Adapter<MoneyListViewHolder>() {
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoneyListViewHolder {
 
