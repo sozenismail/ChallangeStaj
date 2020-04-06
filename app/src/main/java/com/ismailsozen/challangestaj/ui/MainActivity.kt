@@ -30,7 +30,6 @@ class MainActivity : AppCompatActivity() {
         fetchJson()
 
 
-
     }
 
      fun fetchJson() {
