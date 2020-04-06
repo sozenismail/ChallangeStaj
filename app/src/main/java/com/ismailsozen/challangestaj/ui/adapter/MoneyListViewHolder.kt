@@ -32,24 +32,25 @@ class MoneyListViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
     fun bind(money: Coins) {
 
         moneytype.text = money.name
-        val round =money.price.toBigDecimal().setScale(2,RoundingMode.HALF_EVEN).toDouble()
+        val round =money.price.toBigDecimal().setScale(2, RoundingMode.FLOOR).toDouble()
 
         moneyprice.text = round.toString()
-
+        // moneyprice.text=money.price
         moneydetail=money.description
 
 
-         if (money.color==null || money.color.length<6){
-             moneyprice.setTextColor(Color.parseColor("#000000"))
-             moneytype.setTextColor(Color.parseColor("#000000"))
+        if (money.color==null || money.color.length<6){
+            moneyprice.setTextColor(Color.parseColor("#000000"))
+            moneytype.setTextColor(Color.parseColor("#000000"))
 
-         }
+        }
 
-         else  {
-             moneyprice.setTextColor(Color.parseColor(money.color))
-             moneytype.setTextColor(Color.parseColor(money.color))
+        else  {
+            moneyprice.setTextColor(Color.parseColor(money.color))
+            moneytype.setTextColor(Color.parseColor(money.color))
+        }
 
-          }
+
 
 
         GlideToVectorYou
