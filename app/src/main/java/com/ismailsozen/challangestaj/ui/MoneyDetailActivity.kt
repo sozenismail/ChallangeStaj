@@ -24,8 +24,20 @@ class MoneyDetailActivity : AppCompatActivity() {
         val getUrlSvg=getIntent.getStringExtra("moneyimage")
         var moneycolor=getIntent.getStringExtra("moneycolor")
 
-        textViewMoneyType.setTextColor(Color.parseColor(moneycolor))
-        textViewMoneyPrice.setTextColor(Color.parseColor(moneycolor))
+
+
+        if (moneycolor==null || moneycolor.length<6){
+
+            textViewMoneyType.setTextColor(Color.parseColor("#000000"))
+            textViewMoneyPrice.setTextColor(Color.parseColor("#000000"))
+
+        }
+
+        else  {
+            textViewMoneyType.setTextColor(Color.parseColor(moneycolor))
+            textViewMoneyPrice.setTextColor(Color.parseColor(moneycolor))
+
+        }
 
         if (getIntent !=null)
         {
